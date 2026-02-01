@@ -26,7 +26,7 @@ void GameObject_Destroy(GameObject *gameObject)
     {
         for (int i = 0; i < gameObject->componentCount; i++)
         {
-            free(gameObject->components[i]);
+            Component_Destroy(gameObject->components[i]);
         }
     }
     free(gameObject);
