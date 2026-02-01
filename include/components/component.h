@@ -1,7 +1,7 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-typedef struct GameObject;
+#include <stdlib.h>
 
 typedef enum
 {
@@ -9,16 +9,18 @@ typedef enum
     COMPONENT_RIGIDBODY,
     COMPONENT_SPRITE,
     COMPONENT_COLLIDER
-
 } ComponentType;
 
-typedef struct Component
+// Forward Declaration
+struct GameObject;
+
+typedef struct
 {
+    struct GameObject *owner;
     ComponentType type;
-    GameObject *owner;
 } Component;
 
-Component *Component_Create(GameObject *owner, ComponentType type);
+Component *Component_Create(struct GameObject *owner, ComponentType type);
 void Component_Destroy(Component *component);
 
 #endif
