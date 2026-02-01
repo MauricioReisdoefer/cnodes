@@ -22,4 +22,12 @@ GameObject *GameObject_Create()
 }
 void GameObject_Destroy(GameObject *gameObject)
 {
+    if (gameObject->componentCount > 0)
+    {
+        for (int i = 0; i < gameObject->componentCount; i++)
+        {
+            free(gameObject->components[i]);
+        }
+    }
+    free(gameObject);
 }
