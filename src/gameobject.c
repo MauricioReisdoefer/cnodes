@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "gameobject.h"
-#include "module.h"
+#include "feature.h"
 
 GameObject *GameObject_Create()
 {

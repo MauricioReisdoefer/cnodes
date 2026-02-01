@@ -4,11 +4,11 @@
 #define MAX_COMPONENTS 16
 #define MAX_TAG_SIZE 32
 
-#include "module.h"
+#include "feature.h"
 
 typedef struct GameObject
 {
-    Module *components[MAX_COMPONENTS];
+    Feature *components[MAX_COMPONENTS];
     int active;
     int componentCount;
     char tag[MAX_TAG_SIZE];
