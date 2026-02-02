@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include "feature.h"
+#include "console.h"
 
 const char *_feature_type_to_string(FeatureType type)
 {
@@ -26,7 +27,7 @@ Feature *Feature_Create(Node *owner, FeatureType type)
     Feature *feature = (Feature *)malloc(sizeof(Feature));
     if (feature == NULL)
     {
-        printf("Feature_Create: Feature of type %s was not initialized!\n", _feature_type_to_string(type));
+        STRUCT_CONSOLE_ERROR("Feature_Create: Feature of type %s was not initialized!\n", _feature_type_to_string(type));
         return NULL;
     }
 

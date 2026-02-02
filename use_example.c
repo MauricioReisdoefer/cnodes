@@ -1,10 +1,12 @@
 #include <stdio.h>
 
 #include "node.h"
+#include "console.h"
 #include "feature.h"
 
 int main()
 {
+    Struct_Console_Init(STRUCT_CONSOLE_FLAG_DEBUG_MODE);
     Node *firstNode = Node_Create();
     Feature *emptyFeature = Feature_Create(firstNode, FEATURE_UNDEFINED);
 
@@ -13,12 +15,12 @@ int main()
 
     if (firstNode)
     {
-        printf("firstNode was Destroyed");
+        STRUCT_CONSOLE_DEBUG("firstNode was Destroyed");
     }
 
     if (emptyFeature)
     {
-        printf("emptyFeature was Destroyed");
+        STRUCT_CONSOLE_DEBUG("emptyFeature was Destroyed");
     }
     return 0;
 }

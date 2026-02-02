@@ -4,14 +4,14 @@
 
 #include "node.h"
 #include "feature.h"
+#include "console.h"
 
 Node *Node_Create()
 {
     Node *node = (Node *)malloc(sizeof(Node));
-
     if (node == NULL)
     {
-        printf("Node_Create: Node was not initialized!");
+        STRUCT_CONSOLE_ERROR("Node_Create: Node was not initialized!");
         return NULL;
     }
 
@@ -50,13 +50,13 @@ void Node_Add_Feature(Node *self, Feature *feature)
 {
     if (!self || !feature)
     {
-        printf("Node_Add_Feature: self or feature is NULL\n");
+        STRUCT_CONSOLE_WARN("Node_Add_Feature: self or feature is NULL\n");
         return;
     }
 
     if (self->featureCount >= MAX_COMPONENTS)
     {
-        printf("Node_Add_Feature: maximum features reached\n");
+        STRUCT_CONSOLE_WARN("Node_Add_Feature: maximum features reached\n");
         return;
     }
 
@@ -68,7 +68,7 @@ Feature *Node_Get_Feature(Node *self, FeatureType type)
 {
     if (!self)
     {
-        printf("Node_Get_Feature: self is NULL\n");
+        STRUCT_CONSOLE_WARN("Node_Get_Feature: self is NULL\n");
         return NULL;
     }
 
