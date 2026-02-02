@@ -10,8 +10,11 @@
 typedef struct Node
 {
     Feature *components[MAX_COMPONENTS];
+    Node *children[MAX_CHILDREN_NODES];
     int active;
+
     int componentCount;
+    int childrenCount;
     char tag[MAX_TAG_SIZE];
 } Node;
 
