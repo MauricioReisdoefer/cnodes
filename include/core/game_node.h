@@ -3,7 +3,7 @@
 #define MAX_CHILDREN_NODES 16
 #define MAX_NODE_FEATURES 32
 
-#include "feature.h"
+#include "component.h"
 
 typedef struct GameNode GameNode;
 
@@ -11,7 +11,7 @@ typedef struct GameNode
 {
     char *tag;
     GameNode *children[MAX_CHILDREN_NODES];
-    NodeFeature *features[MAX_NODE_FEATURES];
+    Component *features[MAX_NODE_FEATURES];
 
     int children_count;
     int feature_count;

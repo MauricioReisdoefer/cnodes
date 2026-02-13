@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "game_node.h"
-#include "feature.h"
+#include "component.h"
 
 GameNode *GameNode_Create(const char *tag)
 {
@@ -33,7 +33,7 @@ int GameNode_Destroy(GameNode **self)
 
     for (int i = 0; i < (*self)->feature_count; i++)
     {
-        NodeFeature_Destroy(&(*self)->features[i]);
+        Component_Destroy(&(*self)->features[i]);
     }
 
     free(*self);
