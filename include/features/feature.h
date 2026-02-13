@@ -1,6 +1,5 @@
 #pragma once
 
-typedef struct NodeFeature
-{
+typedef struct NodeFeature NodeFeature;
 
-} NodeFeature;
+int NodeFeature_Destroy(NodeFeature **self);
