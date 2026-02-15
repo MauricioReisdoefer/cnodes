@@ -16,5 +16,3 @@ typedef struct Component
     void (*update)(struct Component *self, float dt);
     void (*destroy)(struct Component *self);
 } Component;
-
-int Component_Destroy(Component **self);
