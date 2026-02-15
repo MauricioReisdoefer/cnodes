@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "game_node.h"
+#include "node.h"
 #include "component.h"
 
 GameNode *GameNode_Create(const char *tag)
