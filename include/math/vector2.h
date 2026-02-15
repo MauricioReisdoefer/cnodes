@@ -8,7 +8,7 @@ typedef struct Vector2
 
 Vector2 Vector2_Zero();
 Vector2 Vector2_Multiply(Vector2 a, Vector2 b);
-Vector2 Vector2_Sum(Vector2 a, Vector2 b);
+Vector2 Vector2_Add(Vector2 a, Vector2 b);
 Vector2 Vector2_Divide(Vector2 a, Vector2 b);
 Vector2 Vector2_Subtract(Vector2 a, Vector2 b);
 
