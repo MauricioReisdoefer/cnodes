@@ -11,7 +11,7 @@ typedef struct GameNode
 {
     char tag[MAX_TAG_SIZE];
 
-    Transform transform;
+    int transform;
 
     int children[MAX_NODES];
     int children_count;
