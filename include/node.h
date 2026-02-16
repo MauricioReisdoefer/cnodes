@@ -1,26 +1,32 @@
 #pragma once
 
-#define MAX_CHILDREN_NODES 16
-#define MAX_NODE_COMPONENT 32
+#define MAX_NODES 4096
+#define MAX_COMPONENTS 16894
+#define MAX_TAG_SIZE 32
 
 #include "component.h"
 #include "transform.h"
 
-typedef struct GameNode GameNode;
-
 typedef struct GameNode
 {
-    char *tag;
+    char tag[MAX_TAG_SIZE];
 
     Transform transform;
 
-    struct GameNode *children[MAX_CHILDREN_NODES];
+    int children[MAX_NODES];
     int children_count;
 
-    Component *components[MAX_NODE_COMPONENT];
+    int components[MAX_COMPONENTS];
     int component_count;
 
 } GameNode;
 
-GameNode *GameNode_Create(char *tag);
-int GameNode_Destroy(GameNode **self);
+extern GameNode g_nodes[MAX_NODES];
+
+extern int g_node_count;
+
+extern int gamenode_free_list[MAX_NODES];
+extern int gamenode_free_count;
+
+int GameNode_Create(const char *tag);
+int GameNode_Destroy(int index);

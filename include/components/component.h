@@ -11,7 +11,7 @@ typedef enum ComponentType
 typedef struct Component
 {
     ComponentType type;
-    GameNode *owner;
+    int owner;
 
     void (*update)(struct Component *self, float dt);
     void (*destroy)(struct Component *self);

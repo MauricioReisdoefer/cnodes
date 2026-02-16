@@ -1,45 +1,67 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "node.h"
 #include "component.h"
 
-GameNode *GameNode_Create(const char *tag)
-{
-    GameNode *self = calloc(1, sizeof(GameNode));
-    if (!self)
-        return NULL;
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-    self->tag = strdup(tag);
-    if (!self->tag)
+int GameNode_Create(const char *tag)
+{
+    int index;
+    if (gamenode_free_count > 0)
     {
-        free(self);
-        return NULL;
+        index = gamenode_free_list[--gamenode_free_count];
+    }
+    else
+    {
+        if (g_node_count >= MAX_NODES)
+            return -1;
+        index = g_node_count++;
     }
 
-    self->transform = Transform_Create();
+    GameNode *node = &g_nodes[index];
+    memset(node, 0, sizeof(GameNode));
 
-    return self;
+    memset(node->children, -1, sizeof(node->children));
+    memset(node->components, -1, sizeof(node->components));
+
+    strncpy(node->tag, tag, MAX_TAG_SIZE - 1);
+    node->tag[MAX_TAG_SIZE - 1] = '\0';
+
+    node->transform = Transform_Create();
+
+    return index;
 }
 
-int GameNode_Destroy(GameNode **self)
+int GameNode_Destroy(int index)
 {
-    if (self == NULL || *self == NULL)
+    if (index < 0 || index >= MAX_NODES)
         return 0;
-    free((*self)->tag);
 
-    for (int i = 0; i < (*self)->children_count; i++)
+    GameNode *node = &g_nodes[index];
+    for (int i = 0; i < node->children_count; i++)
     {
-        GameNode_Destroy(&(*self)->children[i]);
+        int childIndex = node->children[i];
+        if (childIndex >= 0 && childIndex < MAX_NODES)
+        {
+            GameNode_Destroy(childIndex);
+        }
+    }
+    for (int i = 0; i < node->component_count; i++)
+    {
+        int compIndex = node->components[i];
+        if (compIndex >= 0 && compIndex < MAX_COMPONENTS)
+        {
+            Component_Destroy(compIndex);
+        }
     }
 
-    for (int i = 0; i < (*self)->component_count; i++)
-    {
-        Component_Destroy(&(*self)->components[i]);
-    }
+    node->tag[0] = '\0';
 
-    free(*self);
-    *self = NULL;
+    if (gamenode_free_count < MAX_NODES)
+    {
+        gamenode_free_list[gamenode_free_count++] = index;
+    }
 
     return 1;
 }
