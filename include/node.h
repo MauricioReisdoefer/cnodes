@@ -19,6 +19,8 @@ typedef struct GameNode
     int components[MAX_COMPONENTS];
     int component_count;
 
+    int alive;
+
 } GameNode;
 
 extern GameNode g_nodes[MAX_NODES];

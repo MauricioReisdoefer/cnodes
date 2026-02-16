@@ -28,6 +28,7 @@ int GameNode_Create(const char *tag)
     strncpy(node->tag, tag, MAX_TAG_SIZE - 1);
     node->tag[MAX_TAG_SIZE - 1] = '\0';
 
+    node->alive = 1;
     node->transform = Transform_Create();
 
     return index;
@@ -39,6 +40,10 @@ int GameNode_Destroy(int index)
         return 0;
 
     GameNode *node = &g_nodes[index];
+    if (!node->alive)
+        return 0;
+    node->alive = 0;
+
     for (int i = 0; i < node->children_count; i++)
     {
         int childIndex = node->children[i];
@@ -55,6 +60,8 @@ int GameNode_Destroy(int index)
             Component_Destroy(compIndex);
         }
     }
+
+    Transform_Destroy(node->transform);
 
     node->tag[0] = '\0';
 
