@@ -6,7 +6,7 @@
 
 typedef struct Rigidbody2D
 {
-    Vector2 speed;
+    Vector2 velocity;
     Vector2 force_accumulator;
 
     float gravity_scale;
