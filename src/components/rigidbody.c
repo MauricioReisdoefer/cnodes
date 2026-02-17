@@ -44,9 +44,10 @@ CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create()
 void CNodes_Rigidbody2D_Destroy(Component *self)
 {
     CNodes_Rigidbody2D *rb = (CNodes_Rigidbody2D *)self;
+    rb->base.active = 0;
     int index = rb->internal_index;
 
-    if (index < 0 || index >= g_rigidbody_count)
+    if (index < 0 || index >= MAX_COMPONENTS)
         return;
 
     if (rigidbody_free_count < MAX_COMPONENTS)
