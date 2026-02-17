@@ -3,6 +3,7 @@
 
 #include "rigidbody.h"
 #include "vector2.h"
+#include "node.h"
 
 CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create()
 {
@@ -58,6 +59,17 @@ void CNodes_Rigidbody2D_Destroy(Component *self)
 
 void CNodes_Rigidbody2D_Update(Component *self, float dt)
 {
+    CNodes_Rigidbody2D *rb = (CNodes_Rigidbody2D *)self;
+    if (rb == NULL)
+        return;
+
+    Vector2 force = rb->force_accumulator;
+    force = Vector2_Subtract(force, Vector2_Scale(rb->velocity, rb->linear_drag));
+
+    Vector2 acceleration = Vector2_Scale(force, rb->inverse_mass);
+    rb->velocity = Vector2_Add(rb->velocity, Vector2_Scale(acceleration, dt));
+
+    rb->force_accumulator = Vector2_Zero();
 }
 
 void CNodes_Rigidbody2D_AddForce(CNodes_Rigidbody2D_Index index, Vector2 force)
