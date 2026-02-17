@@ -59,3 +59,6 @@ void CNodes_Rigidbody2D_Destroy(Component *self)
 void CNodes_Rigidbody2D_Update(Component *self, float dt)
 {
 }
+
+void CNodes_Rigidbody2D_AddForce(CNodes_Rigidbody2D_Index index);
+void CNodes_Rigidbody2D_SetMass(CNodes_Rigidbody2D_Index index, float mass);

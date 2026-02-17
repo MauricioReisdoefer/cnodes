@@ -14,8 +14,8 @@ typedef struct CNodes_Rigidbody2D
     Vector2 force_accumulator;
 
     float gravity_scale;
-    int use_gravity;
 
+    CNodes_Bool use_gravity;
     CNodes_Rigidbody2D_Index internal_index;
 
     float mass;
@@ -32,4 +32,14 @@ extern int rigidbody_free_count;
 
 CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create();
 void CNodes_Rigidbody2D_Destroy(CNodes_Rigidbody2D_Index index);
+void CNodes_Rigidbody2D_Update(Component *self, float dt);
+
 void CNodes_Rigidbody2D_AddForce(CNodes_Rigidbody2D_Index index);
+void CNodes_Rigidbody2D_SetMass(CNodes_Rigidbody2D_Index index, float mass);
+void CNodes_INTERN_Rigidbody2D_Get(CNodes_Rigidbody2D_Index index);
+
+void CNodes_Rigidbody2D_SetVelocity(CNodes_Rigidbody2D_Index index, Vector2 velocity);
+Vector2 CNodes_Rigidbody2D_GetVelocity(CNodes_Rigidbody2D_Index index);
+void CNodes_Rigidbody2D_SetGravityScale(CNodes_Rigidbody2D_Index index, float scale);
+void CNodes_Rigidbody2D_UseGravity(CNodes_Rigidbody2D_Index index, int use);
+void CNodes_Rigidbody2D_SetLinearDrag(CNodes_Rigidbody2D_Index index, float drag);
