@@ -60,15 +60,61 @@ void CNodes_Rigidbody2D_Update(Component *self, float dt)
 {
 }
 
-void CNodes_Rigidbody2D_AddForce(CNodes_Rigidbody2D_Index index)
+void CNodes_Rigidbody2D_AddForce(CNodes_Rigidbody2D_Index index, Vector2 force)
 {
+    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    if (rb == NULL)
+        return;
+    rb->force_accumulator = Vector2_Add(rb->force_accumulator, force);
 }
-void CNodes_Rigidbody2D_SetMass(CNodes_Rigidbody2D_Index index, float mass) {}
-void CNodes_Rigidbody2D_SetVelocity(CNodes_Rigidbody2D_Index index, Vector2 velocity) {}
-Vector2 CNodes_Rigidbody2D_GetVelocity(CNodes_Rigidbody2D_Index index) {}
-void CNodes_Rigidbody2D_SetGravityScale(CNodes_Rigidbody2D_Index index, float scale) {}
-void CNodes_Rigidbody2D_UseGravity(CNodes_Rigidbody2D_Index index, int use) {}
-void CNodes_Rigidbody2D_SetLinearDrag(CNodes_Rigidbody2D_Index index, float drag) {}
+void CNodes_Rigidbody2D_SetMass(CNodes_Rigidbody2D_Index index, float mass)
+{
+    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    if (rb == NULL)
+        return;
+    rb->mass = mass;
+    rb->inverse_mass = 1.0f / mass;
+}
+void CNodes_Rigidbody2D_SetVelocity(CNodes_Rigidbody2D_Index index, Vector2 velocity)
+{
+    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    if (rb == NULL)
+        return;
+
+    rb->velocity = velocity;
+}
+Vector2 CNodes_Rigidbody2D_GetVelocity(CNodes_Rigidbody2D_Index index)
+{
+    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    if (rb == NULL)
+        return;
+
+    return rb->velocity;
+}
+void CNodes_Rigidbody2D_SetGravityScale(CNodes_Rigidbody2D_Index index, float scale)
+{
+    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    if (rb == NULL)
+        return;
+
+    rb->gravity_scale = scale;
+}
+void CNodes_Rigidbody2D_UseGravity(CNodes_Rigidbody2D_Index index, CNodes_Bool use)
+{
+    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    if (rb == NULL)
+        return;
+
+    rb->use_gravity = use;
+}
+void CNodes_Rigidbody2D_SetLinearDrag(CNodes_Rigidbody2D_Index index, float drag)
+{
+    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    if (rb == NULL)
+        return;
+
+    rb->linear_drag = drag;
+}
 
 CNodes_Rigidbody2D *CNodes_INTERN_Rigidbody2D_Get(CNodes_Rigidbody2D_Index index)
 {
