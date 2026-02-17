@@ -73,3 +73,19 @@ int GameNode_Destroy(int index)
 
     return 1;
 }
+
+GameNode *CNodes_INTERN_GameNode_Get(CNodes_GameNode_Index index)
+{
+    GameNode *node = &g_nodes[index];
+    if (node->alive == CNODES_FALSE)
+        return NULL;
+    return node;
+}
+
+CNodes_Transform_Index CNodes_GameNode_GetTransform(CNodes_GameNode_Index index)
+{
+    GameNode *node = CNodes_INTERN_GameNode_Get(index);
+    if (node == NULL)
+        return -1;
+    return node->transform;
+}

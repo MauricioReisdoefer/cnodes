@@ -4,6 +4,7 @@
 #include "rigidbody.h"
 #include "vector2.h"
 #include "node.h"
+#include "transform.h"
 
 CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create()
 {
@@ -68,6 +69,11 @@ void CNodes_Rigidbody2D_Update(Component *self, float dt)
 
     Vector2 acceleration = Vector2_Scale(force, rb->inverse_mass);
     rb->velocity = Vector2_Add(rb->velocity, Vector2_Scale(acceleration, dt));
+
+    CNodes_Transform_Index index = CNodes_GameNode_GetTransform(rb->base.owner);
+    Transform *transform = CNodes_Transform_Get(index);
+
+    transform->position = Vector2_Add(Vector2_Scale(rb->velocity, dt), transform->position);
 
     rb->force_accumulator = Vector2_Zero();
 }

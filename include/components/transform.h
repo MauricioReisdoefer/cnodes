@@ -4,6 +4,8 @@
 
 #define MAX_COMPONENTS 16894
 
+typedef int CNodes_Transform_Index;
+
 typedef struct Transform
 {
     Vector2 position;
@@ -18,5 +20,7 @@ extern int g_transform_count;
 extern int transform_free_list[MAX_COMPONENTS];
 extern int transform_free_count;
 
-int Transform_Create();
-void Transform_Destroy(int index);
+CNodes_Transform_Index CNodes_Transform_Create();
+void CNodes_Transform_Destroy(CNodes_Transform_Index index);
+
+Transform *CNodes_Transform_Get(CNodes_Transform_Index index);

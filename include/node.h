@@ -9,11 +9,13 @@
 #include "transform.h"
 #include "bool.h"
 
+typedef int CNodes_GameNode_Index;
+
 typedef struct GameNode
 {
     char tag[MAX_TAG_SIZE];
 
-    int transform;
+    CNodes_Transform_Index transform;
 
     int children[MAX_CHILDREN_NODES];
     int children_count;
@@ -32,5 +34,8 @@ extern int g_node_count;
 extern int gamenode_free_list[MAX_NODES];
 extern int gamenode_free_count;
 
-int GameNode_Create(const char *tag);
-int GameNode_Destroy(int index);
+CNodes_GameNode_Index CNodes_GameNode_Create(const char *tag);
+int CNodes_GameNode_Destroy(int index);
+
+GameNode *CNodes_INTERN_GameNode_Get(CNodes_GameNode_Index index);
+CNodes_Transform_Index CNodes_GameNode_GetTransform(CNodes_GameNode_Index index);
