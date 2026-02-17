@@ -12,6 +12,7 @@ typedef struct Component
 {
     ComponentType type;
     int owner;
+    int active;
 
     void (*update)(struct Component *self, float dt);
     void (*destroy)(struct Component *self);

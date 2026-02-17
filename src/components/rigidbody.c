@@ -4,7 +4,7 @@
 #include "rigidbody.h"
 #include "vector2.h"
 
-int Rigidbody2D_Create()
+CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create()
 {
     int index;
 
@@ -20,25 +20,41 @@ int Rigidbody2D_Create()
         index = g_rigidbody_count++;
     }
 
-    Rigidbody2D *t = &g_rigidbodys[index];
+    CNodes_Rigidbody2D *t = &g_rigidbodys[index];
 
     t->velocity = Vector2_Zero();
-    t->force_accumulator = (Vector2){1.0f, 1.0f};
+    t->force_accumulator = Vector2_Zero();
     t->gravity_scale = 1.0f;
     t->use_gravity = 1;
     t->linear_drag = 0.0f;
     t->mass = 1.0f;
+    t->inverse_mass = 1.0f;
+
+    t->internal_index = index;
+
+    t->base.active = 1;
+    t->base.owner = NULL;
+    t->base.type = COMPONENT_RIGIDBODY;
+    t->base.destroy = CNodes_Rigidbody2D_Destroy;
+    t->base.update = CNodes_Rigidbody2D_Update;
 
     return index;
 }
 
-void Rigidbody2D_Destroy(int index)
+void CNodes_Rigidbody2D_Destroy(Component *self)
 {
-    if (index < 0 || index >= MAX_COMPONENTS)
+    CNodes_Rigidbody2D *rb = (CNodes_Rigidbody2D *)self;
+    int index = rb->internal_index;
+
+    if (index < 0 || index >= g_rigidbody_count)
         return;
 
     if (rigidbody_free_count < MAX_COMPONENTS)
     {
         rigidbody_free_list[rigidbody_free_count++] = index;
     }
+}
+
+void CNodes_Rigidbody2D_Update(Component *self, float dt)
+{
 }
