@@ -9,18 +9,18 @@ typedef int CNodes_Rigidbody2D_Index;
 
 typedef struct CNodes_Rigidbody2D
 {
-    Component base;
-    Vector2 velocity;
-    Vector2 force_accumulator;
+    Component base;            // 5 bytes
+    Vector2 velocity;          // 8 bytes
+    Vector2 force_accumulator; // 8 bytes
 
-    float gravity_scale;
+    float gravity_scale; // 4 bytes
 
-    CNodes_Bool use_gravity;
-    CNodes_Rigidbody2D_Index internal_index;
+    CNodes_Bool use_gravity;                 // 1 byte
+    CNodes_Rigidbody2D_Index internal_index; // 2 bytes
 
-    float mass;
-    float inverse_mass;
-    float linear_drag;
+    float mass;         // 4 bytes
+    float inverse_mass; // 4 bytes
+    float linear_drag;  // 4 bytes
 } CNodes_Rigidbody2D;
 
 extern CNodes_Rigidbody2D g_rigidbodys[MAX_COMPONENTS];

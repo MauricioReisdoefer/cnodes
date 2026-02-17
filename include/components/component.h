@@ -12,9 +12,9 @@ typedef enum ComponentType
 
 typedef struct Component
 {
-    ComponentType type;
-    int owner;
-    CNodes_Bool active;
+    ComponentType type; // 2 bytes
+    int owner;          // 2 bytes
+    CNodes_Bool active; // 1 byte
 
     void (*update)(struct Component *self, float dt);
     void (*destroy)(struct Component *self);

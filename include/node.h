@@ -13,17 +13,17 @@ typedef int CNodes_GameNode_Index;
 
 typedef struct GameNode
 {
-    char tag[MAX_TAG_SIZE];
+    char tag[MAX_TAG_SIZE]; // 4 bytes
 
-    CNodes_Transform_Index transform;
+    CNodes_Transform_Index transform; // 2 bytes
 
-    int children[MAX_CHILDREN_NODES];
-    int children_count;
+    int children[MAX_CHILDREN_NODES]; // 32 bytes
+    int children_count;               // 2 bytes
 
-    int components[MAX_NODE_COMPONENTS];
-    int component_count;
+    int components[MAX_NODE_COMPONENTS]; // 32 bytes
+    int component_count;                 // 2 bytes
 
-    CNodes_Bool alive;
+    CNodes_Bool alive; // 1 byte
 
 } GameNode;
 

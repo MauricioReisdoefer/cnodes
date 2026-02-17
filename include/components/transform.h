@@ -8,9 +8,9 @@ typedef int CNodes_Transform_Index;
 
 typedef struct Transform
 {
-    Vector2 position;
-    Vector2 scale;
-    Vector2 rotation;
+    Vector2 position; // 8 bytes
+    Vector2 scale;    // 8 bytes
+    Vector2 rotation; // 8 bytes
 } Transform;
 
 extern Transform g_transforms[MAX_COMPONENTS];
