@@ -1,11 +1,13 @@
 #pragma once
 
 #define MAX_NODES 4096
-#define MAX_COMPONENTS 16894
+#define MAX_CHILDREN_NODES 16
+#define MAX_NODE_COMPONENTS 16
 #define MAX_TAG_SIZE 32
 
 #include "component.h"
 #include "transform.h"
+#include "bool.h"
 
 typedef struct GameNode
 {
@@ -13,13 +15,13 @@ typedef struct GameNode
 
     int transform;
 
-    int children[MAX_NODES];
+    int children[MAX_CHILDREN_NODES];
     int children_count;
 
-    int components[MAX_COMPONENTS];
+    int components[MAX_NODE_COMPONENTS];
     int component_count;
 
-    int alive;
+    CNodes_Bool alive;
 
 } GameNode;
 

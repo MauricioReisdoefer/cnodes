@@ -16,7 +16,7 @@ typedef struct CNodes_Rigidbody2D
     float gravity_scale;
     int use_gravity;
 
-    int internal_index;
+    CNodes_Rigidbody2D_Index internal_index;
 
     float mass;
     float inverse_mass;

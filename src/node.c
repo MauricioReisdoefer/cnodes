@@ -1,5 +1,6 @@
 #include "node.h"
 #include "component.h"
+#include "bool.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -28,7 +29,7 @@ int GameNode_Create(const char *tag)
     strncpy(node->tag, tag, MAX_TAG_SIZE - 1);
     node->tag[MAX_TAG_SIZE - 1] = '\0';
 
-    node->alive = 1;
+    node->alive = CNODES_TRUE;
     node->transform = Transform_Create();
 
     return index;
@@ -42,7 +43,7 @@ int GameNode_Destroy(int index)
     GameNode *node = &g_nodes[index];
     if (!node->alive)
         return 0;
-    node->alive = 0;
+    node->alive = CNODES_FALSE;
 
     for (int i = 0; i < node->children_count; i++)
     {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "bool.h"
+
 typedef enum ComponentType
 {
     COMPONENT_DEFAULT,
@@ -12,7 +14,7 @@ typedef struct Component
 {
     ComponentType type;
     int owner;
-    int active;
+    CNodes_Bool active;
 
     void (*update)(struct Component *self, float dt);
     void (*destroy)(struct Component *self);
