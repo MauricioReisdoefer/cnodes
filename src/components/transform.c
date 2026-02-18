@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+Transform *CN_Transform_Get(int index);
+
 int CN_Transform_Create()
 {
     int index;

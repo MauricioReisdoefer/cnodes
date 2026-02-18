@@ -30,7 +30,7 @@ int CN_Node_Create(const char *tag)
     node->tag[MAX_TAG_SIZE - 1] = '\0';
 
     node->alive = CN_TRUE;
-    node->transform = Transform_Create();
+    node->transform = CN_Transform_Create();
 
     return index;
 }
@@ -50,7 +50,7 @@ int CN_Node_Destroy(int index)
         int childIndex = node->children[i];
         if (childIndex >= 0 && childIndex < MAX_NODES)
         {
-            Node_Destroy(childIndex);
+            CN_Node_Destroy(childIndex);
         }
     }
     for (int i = 0; i < node->component_count; i++)
@@ -58,11 +58,11 @@ int CN_Node_Destroy(int index)
         int compIndex = node->components[i];
         if (compIndex >= 0 && compIndex < MAX_COMPONENTS)
         {
-            Component_Destroy(compIndex);
+            CN_Component_Destroy(compIndex);
         }
     }
 
-    Transform_Destroy(node->transform);
+    CN_Transform_Destroy(node->transform);
 
     node->tag[0] = '\0';
 
@@ -74,7 +74,7 @@ int CN_Node_Destroy(int index)
     return 1;
 }
 
-Node *CN_INTERN_Node_Get(CN_Node_Index index)
+Node *CN_INTERN_Node_Get(int index)
 {
     Node *node = &g_nodes[index];
     if (node->alive == CN_FALSE)
@@ -82,7 +82,7 @@ Node *CN_INTERN_Node_Get(CN_Node_Index index)
     return node;
 }
 
-CN_Transform_Index CN_Node_GetTransform(CN_Node_Index index)
+int CN_Node_GetTransform(int index)
 {
     Node *node = CN_INTERN_Node_Get(index);
     if (node == NULL)
@@ -90,6 +90,6 @@ CN_Transform_Index CN_Node_GetTransform(CN_Node_Index index)
     return node->transform;
 }
 
-CN_Bool CN_Node_AddComponent(CN_Node_Index index, int component_index, ComponentType type)
+CN_Bool CN_Node_AddComponent(int index, int component_index, ComponentType type)
 {
 }

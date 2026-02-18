@@ -17,5 +17,5 @@ typedef struct Component
     CN_Bool active;     // 1 byte
 
     void (*update)(struct Component *self, float dt);
-    void (*destroy)(struct Component *self);
+    void (*destroy)(int index);
 } Component;
