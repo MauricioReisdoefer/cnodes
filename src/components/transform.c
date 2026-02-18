@@ -3,7 +3,14 @@
 
 #include <stdio.h>
 
-Transform *CN_Transform_Get(int index);
+Transform *CN_Transform_Get(int index)
+{
+    if (index >= MAX_COMPONENTS || index <= -1)
+    {
+        return NULL;
+    }
+    return &g_transforms[index];
+}
 
 int CN_Transform_Create()
 {
