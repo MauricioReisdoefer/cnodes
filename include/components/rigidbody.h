@@ -37,7 +37,7 @@ void CN_Rigidbody2D_SetMass(int index, float mass);
 void CN_Rigidbody2D_SetVelocity(int index, Vector2 velocity);
 Vector2 CN_Rigidbody2D_GetVelocity(int index);
 void CN_Rigidbody2D_SetGravityScale(int index, float scale);
-void CN_Rigidbody2D_UseGravity(int index, int use);
+void CN_Rigidbody2D_UseGravity(int index, CN_Bool use);
 void CN_Rigidbody2D_SetLinearDrag(int index, float drag);
 
 CN_Rigidbody2D *CN_INTERN_Rigidbody2D_Get(int index);

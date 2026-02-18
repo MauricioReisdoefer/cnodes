@@ -58,7 +58,7 @@ int CN_Node_Destroy(int index)
         int compIndex = node->components[i];
         if (compIndex >= 0 && compIndex < MAX_COMPONENTS)
         {
-            CN_Component_Destroy(compIndex);
+            continue;
         }
     }
 

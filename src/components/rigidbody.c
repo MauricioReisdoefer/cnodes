@@ -47,7 +47,6 @@ void CN_Rigidbody2D_Destroy(int index)
 {
     CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     rb->base.active = 0;
-    int index = rb->internal_index;
 
     if (index < 0 || index >= MAX_COMPONENTS)
         return;
@@ -70,7 +69,7 @@ void CN_Rigidbody2D_Update(Component *self, float dt)
     Vector2 acceleration = Vector2_Scale(force, rb->inverse_mass);
     rb->velocity = Vector2_Add(rb->velocity, Vector2_Scale(acceleration, dt));
 
-    int index = CN_GameNode_GetTransform(rb->base.owner);
+    int index = CN_Node_GetTransform(rb->base.owner);
     Transform *transform = CN_Transform_Get(index);
 
     transform->position = Vector2_Add(Vector2_Scale(rb->velocity, dt), transform->position);
@@ -105,7 +104,7 @@ Vector2 CN_Rigidbody2D_GetVelocity(int index)
 {
     CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
-        return;
+        return Vector2_Zero();
 
     return rb->velocity;
 }
