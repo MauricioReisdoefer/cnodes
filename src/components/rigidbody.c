@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "rigidbody.h"
-#include "vector2.h"
+#include "components/rigidbody.h"
+#include "math/vector2.h"
 #include "node.h"
-#include "transform.h"
+#include "components/transform.h"
 
 CN_Rigidbody2D_Index CN_Rigidbody2D_Create()
 {

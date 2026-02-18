@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "vector2.h"
+#include "math/vector2.h"
 
 Vector2 Vector2_Zero()
 {

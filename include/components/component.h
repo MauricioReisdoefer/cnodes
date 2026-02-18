@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bool.h"
+#include "core/bool.h"
 
 typedef enum ComponentType
 {

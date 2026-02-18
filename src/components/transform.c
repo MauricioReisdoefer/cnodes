@@ -1,5 +1,5 @@
-#include "transform.h"
-#include "vector2.h"
+#include "components/transform.h"
+#include "math/vector2.h"
 
 #include <stdio.h>
 

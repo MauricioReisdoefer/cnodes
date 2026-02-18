@@ -5,9 +5,9 @@
 #define MAX_NODE_COMPONENTS 16
 #define MAX_TAG_SIZE 32
 
-#include "component.h"
-#include "transform.h"
-#include "bool.h"
+#include "components/component.h"
+#include "components/transform.h"
+#include "core/bool.h"
 
 typedef int CN_Node_Index;
 

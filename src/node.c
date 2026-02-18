@@ -1,6 +1,6 @@
 #include "node.h"
-#include "component.h"
-#include "bool.h"
+#include "components/component.h"
+#include "core/bool.h"
 
 #include <string.h>
 #include <stdlib.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vector2.h"
+#include "math/vector2.h"
 
 #define MAX_COMPONENTS 16894
 
