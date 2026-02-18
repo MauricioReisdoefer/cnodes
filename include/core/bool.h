@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-typedef uint8_t CNodes_Bool;
+typedef uint8_t CN_Bool;
 
-#define CNODES_TRUE 1
-#define CNODES_FALSE 0
+#define CN_TRUE 1
+#define CN_FALSE 0

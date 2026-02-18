@@ -6,7 +6,7 @@
 #include "node.h"
 #include "transform.h"
 
-CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create()
+CN_Rigidbody2D_Index CN_Rigidbody2D_Create()
 {
     int index;
 
@@ -22,7 +22,7 @@ CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create()
         index = g_rigidbody_count++;
     }
 
-    CNodes_Rigidbody2D *t = &g_rigidbodys[index];
+    CN_Rigidbody2D *t = &g_rigidbodys[index];
 
     t->velocity = Vector2_Zero();
     t->force_accumulator = Vector2_Zero();
@@ -37,15 +37,15 @@ CNodes_Rigidbody2D_Index CNodes_Rigidbody2D_Create()
     t->base.active = 1;
     t->base.owner = NULL;
     t->base.type = COMPONENT_RIGIDBODY;
-    t->base.destroy = CNodes_Rigidbody2D_Destroy;
-    t->base.update = CNodes_Rigidbody2D_Update;
+    t->base.destroy = CN_Rigidbody2D_Destroy;
+    t->base.update = CN_Rigidbody2D_Update;
 
     return index;
 }
 
-void CNodes_Rigidbody2D_Destroy(Component *self)
+void CN_Rigidbody2D_Destroy(Component *self)
 {
-    CNodes_Rigidbody2D *rb = (CNodes_Rigidbody2D *)self;
+    CN_Rigidbody2D *rb = (CN_Rigidbody2D *)self;
     rb->base.active = 0;
     int index = rb->internal_index;
 
@@ -58,9 +58,9 @@ void CNodes_Rigidbody2D_Destroy(Component *self)
     }
 }
 
-void CNodes_Rigidbody2D_Update(Component *self, float dt)
+void CN_Rigidbody2D_Update(Component *self, float dt)
 {
-    CNodes_Rigidbody2D *rb = (CNodes_Rigidbody2D *)self;
+    CN_Rigidbody2D *rb = (CN_Rigidbody2D *)self;
     if (rb == NULL)
         return;
 
@@ -70,74 +70,74 @@ void CNodes_Rigidbody2D_Update(Component *self, float dt)
     Vector2 acceleration = Vector2_Scale(force, rb->inverse_mass);
     rb->velocity = Vector2_Add(rb->velocity, Vector2_Scale(acceleration, dt));
 
-    CNodes_Transform_Index index = CNodes_GameNode_GetTransform(rb->base.owner);
-    Transform *transform = CNodes_Transform_Get(index);
+    CN_Transform_Index index = CN_GameNode_GetTransform(rb->base.owner);
+    Transform *transform = CN_Transform_Get(index);
 
     transform->position = Vector2_Add(Vector2_Scale(rb->velocity, dt), transform->position);
 
     rb->force_accumulator = Vector2_Zero();
 }
 
-void CNodes_Rigidbody2D_AddForce(CNodes_Rigidbody2D_Index index, Vector2 force)
+void CN_Rigidbody2D_AddForce(CN_Rigidbody2D_Index index, Vector2 force)
 {
-    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
         return;
     rb->force_accumulator = Vector2_Add(rb->force_accumulator, force);
 }
-void CNodes_Rigidbody2D_SetMass(CNodes_Rigidbody2D_Index index, float mass)
+void CN_Rigidbody2D_SetMass(CN_Rigidbody2D_Index index, float mass)
 {
-    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
         return;
     rb->mass = mass;
     rb->inverse_mass = 1.0f / mass;
 }
-void CNodes_Rigidbody2D_SetVelocity(CNodes_Rigidbody2D_Index index, Vector2 velocity)
+void CN_Rigidbody2D_SetVelocity(CN_Rigidbody2D_Index index, Vector2 velocity)
 {
-    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
         return;
 
     rb->velocity = velocity;
 }
-Vector2 CNodes_Rigidbody2D_GetVelocity(CNodes_Rigidbody2D_Index index)
+Vector2 CN_Rigidbody2D_GetVelocity(CN_Rigidbody2D_Index index)
 {
-    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
         return;
 
     return rb->velocity;
 }
-void CNodes_Rigidbody2D_SetGravityScale(CNodes_Rigidbody2D_Index index, float scale)
+void CN_Rigidbody2D_SetGravityScale(CN_Rigidbody2D_Index index, float scale)
 {
-    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
         return;
 
     rb->gravity_scale = scale;
 }
-void CNodes_Rigidbody2D_UseGravity(CNodes_Rigidbody2D_Index index, CNodes_Bool use)
+void CN_Rigidbody2D_UseGravity(CN_Rigidbody2D_Index index, CN_Bool use)
 {
-    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
         return;
 
     rb->use_gravity = use;
 }
-void CNodes_Rigidbody2D_SetLinearDrag(CNodes_Rigidbody2D_Index index, float drag)
+void CN_Rigidbody2D_SetLinearDrag(CN_Rigidbody2D_Index index, float drag)
 {
-    CNodes_Rigidbody2D *rb = CNodes_INTERN_Rigidbody2D_Get(index);
+    CN_Rigidbody2D *rb = CN_INTERN_Rigidbody2D_Get(index);
     if (rb == NULL)
         return;
 
     rb->linear_drag = drag;
 }
 
-CNodes_Rigidbody2D *CNodes_INTERN_Rigidbody2D_Get(CNodes_Rigidbody2D_Index index)
+CN_Rigidbody2D *CN_INTERN_Rigidbody2D_Get(CN_Rigidbody2D_Index index)
 {
-    CNodes_Rigidbody2D *rb = &g_rigidbodys[index];
-    if (rb->base.active == CNODES_FALSE)
+    CN_Rigidbody2D *rb = &g_rigidbodys[index];
+    if (rb->base.active == CN_FALSE)
         return NULL;
     return rb;
 }

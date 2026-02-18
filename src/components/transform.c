@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-int Transform_Create()
+int CN_Transform_Create()
 {
     int index;
 
@@ -28,7 +28,7 @@ int Transform_Create()
     return index;
 }
 
-void Transform_Destroy(int index)
+void CN_Transform_Destroy(int index)
 {
     if (index < 0 || index >= MAX_COMPONENTS)
         return;

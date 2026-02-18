@@ -4,7 +4,7 @@
 
 #define MAX_COMPONENTS 16894
 
-typedef int CNodes_Transform_Index;
+typedef int CN_Transform_Index;
 
 typedef struct Transform
 {
@@ -20,7 +20,7 @@ extern int g_transform_count;
 extern int transform_free_list[MAX_COMPONENTS];
 extern int transform_free_count;
 
-CNodes_Transform_Index CNodes_Transform_Create();
-void CNodes_Transform_Destroy(CNodes_Transform_Index index);
+CN_Transform_Index CN_Transform_Create();
+void CN_Transform_Destroy(CN_Transform_Index index);
 
-Transform *CNodes_Transform_Get(CNodes_Transform_Index index);
+Transform *CN_Transform_Get(CN_Transform_Index index);
