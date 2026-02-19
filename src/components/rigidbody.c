@@ -6,10 +6,10 @@
 #include "node.h"
 #include "components/transform.h"
 
-Node g_rigidbodys[MAX_NODES] = {0};
+CN_Rigidbody2D g_rigidbodys[MAX_COMPONENTS] = {0};
 int g_rigidbody_count = 0;
 
-int rigidbody_free_list[MAX_NODES] = {0};
+int rigidbody_free_list[MAX_COMPONENTS] = {0};
 int rigidbody_free_count = 0;
 
 void CN_Rigidbody2D_Init(void)
@@ -17,7 +17,7 @@ void CN_Rigidbody2D_Init(void)
     g_rigidbody_count = 0;
     rigidbody_free_count = 0;
 
-    for (int i = 0; i < MAX_NODES; i++)
+    for (int i = 0; i < MAX_COMPONENTS; i++)
     {
         rigidbody_free_list[i] = 0;
     }
