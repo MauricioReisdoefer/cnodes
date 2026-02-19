@@ -28,6 +28,7 @@ extern int g_rigidbody_count;
 extern int rigidbody_free_list[MAX_COMPONENTS];
 extern int rigidbody_free_count;
 
+void CN_Rigidbody2D_Init(void);
 int CN_Rigidbody2D_Create();
 void CN_Rigidbody2D_Destroy(int index);
 void CN_Rigidbody2D_Update(Component *self, float dt);

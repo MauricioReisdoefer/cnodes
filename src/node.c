@@ -72,11 +72,7 @@ int CN_Node_Destroy(int index)
     }
     for (int i = 0; i < node->component_count; i++)
     {
-        int compIndex = node->components[i];
-        if (compIndex >= 0 && compIndex < MAX_COMPONENTS)
-        {
-            continue;
-        }
+        // DESTROY COMPONENTS
     }
 
     CN_Transform_Destroy(node->transform);
