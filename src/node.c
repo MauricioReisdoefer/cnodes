@@ -6,6 +6,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+Node g_nodes[MAX_NODES] = {0};
+int g_node_count = 0;
+
+int gamenode_free_list[MAX_NODES] = {0};
+int gamenode_free_count = 0;
+
+void CN_Node_Init(void)
+{
+    g_node_count = 0;
+    gamenode_free_count = 0;
+
+    for (int i = 0; i < MAX_NODES; i++)
+    {
+        gamenode_free_list[i] = 0;
+    }
+}
+
 int CN_Node_Create(const char *tag)
 {
     int index;
