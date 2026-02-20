@@ -23,7 +23,7 @@ void CN_Rigidbody2D_Init(void)
     }
 }
 
-int CN_Rigidbody2D_Create()
+Component *CN_Rigidbody2D_Create()
 {
     int index;
 
@@ -34,7 +34,7 @@ int CN_Rigidbody2D_Create()
     else
     {
         if (g_rigidbody_count >= MAX_COMPONENTS)
-            return -1;
+            return NULL;
 
         index = g_rigidbody_count++;
     }
@@ -56,8 +56,9 @@ int CN_Rigidbody2D_Create()
     t->base.type = COMPONENT_RIGIDBODY;
     t->base.destroy = CN_Rigidbody2D_Destroy;
     t->base.update = CN_Rigidbody2D_Update;
+    t->base.index = index;
 
-    return index;
+    return &t->base;
 }
 
 void CN_Rigidbody2D_Destroy(int index)
