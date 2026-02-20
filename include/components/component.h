@@ -15,6 +15,7 @@ typedef struct Component
     ComponentType type; // 2 bytes
     int owner;          // 2 bytes
     CN_Bool active;     // 1 byte
+    int index;          // 2 bytes
 
     void (*update)(struct Component *self, float dt);
     void (*destroy)(int index);

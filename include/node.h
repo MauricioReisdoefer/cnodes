@@ -9,12 +9,6 @@
 #include "components/transform.h"
 #include "core/bool.h"
 
-typedef struct _NodeComponentData
-{
-    int index;
-    ComponentType index_type;
-} _NodeComponentData;
-
 typedef struct Node
 {
     char tag[MAX_TAG_SIZE]; // 4 bytes
@@ -24,8 +18,8 @@ typedef struct Node
     int children[MAX_CHILDREN_NODES]; // 32 bytes
     int children_count;               // 2 bytes
 
-    _NodeComponentData components[MAX_NODE_COMPONENTS]; // 32 bytes
-    int component_count;                                // 2 bytes
+    Component components[MAX_NODE_COMPONENTS];
+    int component_count; // 2 bytes
 
     CN_Bool alive; // 1 byte
 
@@ -43,4 +37,4 @@ int CN_Node_Destroy(int index);
 
 Node *CN_INTERN_Node_Get(int index);
 int CN_Node_GetTransform(int index);
-CN_Bool CN_Node_AddComponent(int index, int component_index, ComponentType type);
+CN_Bool CN_Node_AddComponent(int index, Component component);
