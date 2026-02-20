@@ -103,6 +103,14 @@ int CN_Node_GetTransform(int index)
     return node->transform;
 }
 
-CN_Bool CN_Node_AddComponent(int index, int component_index, ComponentType type)
+CN_Bool CN_Node_AddComponent(int index, Component *component)
 {
+    if (index >= MAX_NODES || index <= 0)
+    {
+        return CN_FALSE;
+    }
+    Node *node = CN_INTERN_Node_Get(index);
+    if (node == NULL)
+        return -1;
+    node->components[node->component_count] = component;
 }
